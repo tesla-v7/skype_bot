@@ -9,7 +9,7 @@ module.exports = function(sequelize, DataTypes) {
         user_name: DataTypes.TEXT('tiny'),
         user_id: DataTypes.TEXT('tiny'),
         state: {
-            type: DataTypes.BOOLEAN,
+            type: DataTypes.INTEGER(1),
             get(){
                 var state = this.getDataValue('state');
                 if(state == IN_COME){
