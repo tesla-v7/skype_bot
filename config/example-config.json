@@ -1,0 +1,42 @@
+{
+  "development": {
+    "username": "",
+    "password": "",
+    "database": "skype",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "timezone": "+06:00",
+    "sync": {
+      "force": true
+    },
+    "define": {
+      "timestamps": false
+    },
+    "auth": {
+      "skype":{
+        "appId": "",
+        "appPassword": ""
+      },
+      "google":{
+        "token":{
+          "access_token": "",
+          "refresh_token": "",
+          "token_type": "",
+          "expiry_date": 0
+        },
+        "installed":{
+          "client_id":"",
+          "project_id":"",
+          "auth_uri":"https://accounts.google.com/o/oauth2/auth",
+          "token_uri":"https://accounts.google.com/o/oauth2/token",
+          "auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs",
+          "client_secret":"",
+          "redirect_uris":[
+            "urn:ietf:wg:oauth:2.0:oob",
+            "http://localhost"
+          ]
+        }
+      }
+    }
+  }
+}
