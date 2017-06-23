@@ -8,17 +8,11 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id: {
-        type: Sequelize.INEGER
-      },
-      user_id: {
-        type: Sequelize.TEXT
-      },
       user_name: {
-        type: Sequelize.TEXT
+        type: Sequelize.TEXT('tiny')
       },
       user_doc_name: {
-        type: Sequelize.TEXT
+        type: Sequelize.TEXT('tiny')
       },
       createdAt: {
         allowNull: false,
