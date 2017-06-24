@@ -1,6 +1,6 @@
 'use strict';
-var models = require('../models');
-var parser = require('./parser');
+var models = require('../models/index');
+var parser = require('../lib/parser');
 var moment    = require('moment');
 
 module.exports = {
