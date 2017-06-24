@@ -2,7 +2,12 @@ var env       = process.env.NODE_ENV || 'development';
 var config    = require(__dirname + '/config/config.json')[env || 'development'];
 var restify   = require('restify');
 var builder   = require('botbuilder');
-var saveData  = require('./lib/saveData');
+
+var router    = require('./lib/router');
+var loger  = require('./controller/loger');
+var users      = require('./controller/users');
+var help      = require('./controller/help');
+var googleDoc = require('./lib/googleDoc');
 
 // Setup Restify Server
 var server = restify.createServer();
@@ -19,13 +24,13 @@ var connector = new builder.ChatConnector({
 // Listen for messages from users 
 server.post('/api/messages', connector.listen());
 
+googleDoc.setAuth(config.auth.google);
+
+router.add(['in', 'out', 'пришел', 'ушел'], loger.saveLog);
+router.add('echo', help.echo);
+router.add('help', help.help);
+
 var bot = new builder.UniversalBot(connector, function (session) {
-    console.log(session);
-    var result = saveData.saveLog(session.message);
-    console.log(result);
-    if(result.error){
-        session.send('Пользователь %s: %s', result.saveData.user_name, result.msg);
-    }else{
-        session.send('Пользователь %s собитие %s в %s ', result.saveData.user_name, result.saveData.state, result.time);
-    }
+    let command = session.message.text.split(' ')[0].toLowerCase();
+    session.send(router.go(command || '', session.message));
 });
