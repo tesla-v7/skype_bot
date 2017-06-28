@@ -4,10 +4,12 @@ var restify   = require('restify');
 var builder   = require('botbuilder');
 
 var router    = require('./lib/router');
-var loger  = require('./controller/loger');
-var users      = require('./controller/users');
+var loger     = require('./controller/loger');
+var users     = require('./controller/users');
 var help      = require('./controller/help');
-var googleDoc = require('./lib/googleDoc');
+var sync      = require('./controller/syncGoogleSheet');
+var task      = require('./controller/task');
+// var googleDoc = require('./lib/googleDoc');
 
 // Setup Restify Server
 var server = restify.createServer();
@@ -24,13 +26,35 @@ var connector = new builder.ChatConnector({
 // Listen for messages from users 
 server.post('/api/messages', connector.listen());
 
-googleDoc.setAuth(config.auth.google);
+// googleDoc.setAuth(config.auth.google);
+sync.setAuth(config.auth.google);
+sync.setSheetParams(config.google_sheet);
+// sync.setSheetParams('test');
 
 router.add(['in', 'out', 'пришел', 'ушел'], loger.saveLog);
-router.add('echo', help.echo);
+router.add('ping', help.ping);
 router.add('help', help.help);
+router.add('default', help.default);
+router.add('sync', sync.syncAll.bind(sync));
+router.add(['i', 'я'], users.saveUser);
+// router.add('test', task.createTask.bind(task));
+router.add('test', task.sevaTaskGooglDoc.bind(task));
 
 var bot = new builder.UniversalBot(connector, function (session) {
-    let command = session.message.text.split(' ')[0].toLowerCase();
-    session.send(router.go(command || '', session.message));
+    // session.sendTyping();
+    // console.log(session);
+    console.log(session.message);
+    Promise.resolve(router.go(session.message)).
+    then((resylt) => {
+        // if(Array.isArray(resylt)){
+        //     resylt.map(function (item) {
+        //         session.send(item);
+        //     });
+        //     return;
+        // }
+        session.send(resylt);
+    }).
+    catch((error) => {
+        session.send('Возникла ошибка');
+    });
 });
