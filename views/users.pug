@@ -1,0 +1,21 @@
+extends layout
+
+block content
+    h1= title
+    .tablewrap
+        table
+            tr.head_table
+                th
+                    b Список сотрудников
+                th
+                    b Дней
+                th
+                    b Пришел
+                th
+                    b Ушел
+                th
+                    b Всего
+
+            tr.stuff_list
+                each u in users
+                    td #{u.user_name}

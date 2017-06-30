@@ -1,0 +1,15 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+.head_table th{
+  width: 120px;
+
+}
+.tablewrap table th{
+  border: 1px solid;
+}
+.stuff_list td{
+  border: 1px solid;
+}
