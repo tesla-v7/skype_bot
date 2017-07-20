@@ -27,8 +27,11 @@ var connector = new builder.ChatConnector({
 // Listen for messages from users 
 server.post('/api/messages', connector.listen());
 
+moment.tz(config.timezone);
+
 task.setAuth(config.auth.google);
 task.setSheetParams(config.google_sheet);
+loger.setTimeZone(config.timezone);
 
 let msg = new builder.Message().address(config.skype.address);
 

@@ -4,7 +4,11 @@ var parser = require('../lib/parser');
 var moment    = require('moment');
 var builder   = require('botbuilder');
 
+
 module.exports = {
+    setTimeZone: function (timeZone) {
+        moment.tz(timeZone);
+    },
     saveLog: function(command, skypeData){
         var parseData = parser.parseParams(skypeData);
         var saveData = {
