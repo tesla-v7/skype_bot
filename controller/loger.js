@@ -2,9 +2,10 @@
 var models = require('../models/index');
 var parser = require('../lib/parser');
 var moment    = require('moment');
+var builder   = require('botbuilder');
 
 module.exports = {
-    saveLog: function(skypeData){
+    saveLog: function(command, skypeData){
         var parseData = parser.parseParams(skypeData);
         var saveData = {
             text: skypeData.text || '',
