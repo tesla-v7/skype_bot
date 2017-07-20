@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-    help: function (data) {
+    help: function (command, skypeData) {
         let text = [
             '- help - список комманд\r\n -\r\n',
             '- (in | пришел) - время прихода можно указвать без даты берется текущее время' +
@@ -12,21 +12,20 @@ module.exports = {
             "in 8:45\r\n" +
             "in 2017.06.25 8:45\r\n -\r\n",
             '- (out | ушел) - время ухода праметры аналогичны комманде (in | пришел)\r\n -\r\n',
-            '- (i | я)  - связать вашь skype ID с вашим именем в табеле\r\n' +
+            '- (i | я)[delete || удалить]  - связать вашь skype ID с вашим именем в табеле или удалить\r\n' +
             'Пример:\r\n'+
-            'i Иван Иванычь\r\n -\r\n',
+            'i Иван Иванычь\r\n',
+            'i delete\r\n -\r\n',
             // '- sync - заполнить табель',
             '- ping -  проверка связи с ботом',
         ];
-        // return text;
         return text.join("");
-        // return text.join("\r\n \r\n");
     },
-    ping: function (data) {
-        return `${data.user.name} pong`;
+    ping: function (command, skypeData) {
+        return `${skypeData.user.name} pong`;
     },
-    default: function (data) {
-        return `${data.user.name} воспользуйтесь коммандой help`;
+    default: function (command, skypeData) {
+        return `${skypeData.user.name} воспользуйтесь коммандой help`;
 
     }
 };
