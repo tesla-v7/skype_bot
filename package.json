@@ -11,7 +11,6 @@
   "license": "ISC",
   "dependencies": {
     "botbuilder": "^3.8.4",
-    "express": "^4.15.3",
     "google-auth-library": "^0.10.0",
     "googleapis": "^19.0.0",
     "moment": "^2.18.1",
@@ -20,12 +19,6 @@
     "node-schedule": "^1.2.3",
     "restify": "^4.3.0",
     "sequelize": "^4.1.0",
-    "sequelize-cli": "^2.7.0",
-    "body-parser": "~1.17.1",
-    "cookie-parser": "~1.4.3",
-    "debug": "~2.6.3",
-    "morgan": "~1.8.1",
-    "pug": "~2.0.0-beta11",
-    "serve-favicon": "~2.4.2"
+    "sequelize-cli": "^2.7.0"
   }
 }
