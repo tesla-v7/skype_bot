@@ -10,7 +10,6 @@ var router    = require('./lib/router');
 var loger     = require('./controller/loger');
 var users     = require('./controller/users');
 var util      = require('./controller/util');
-// var sync      = require('./controller/syncGoogleSheet');
 var task      = require('./controller/task');
 
 // Setup Restify Server
@@ -50,9 +49,8 @@ router.add(['in', 'out', 'пришел', 'ушел'], function (command, skypeDa
 router.add('ping', util.ping);
 router.add('help', util.help);
 router.add('default', util.default);
-// router.add('sync', sync.syncAll.bind(sync));
 router.add(['i', 'я'], users.run.bind(users));
-// router.add('test', task.saveTaskInGooglDoc.bind(task));
+
 let scheduleGoogle = schedule.scheduleJob(config.cron, function () {
     let createTask = task.createTask.bind(task);
     let saveTaskInGooglDoc = task.saveTaskInGooglDoc.bind(task);
