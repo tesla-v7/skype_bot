@@ -59,4 +59,5 @@ typings/
 
 config/config.json
 lib/client_secret.json
+./.idea/*
 
