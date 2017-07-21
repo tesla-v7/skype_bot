@@ -5,7 +5,7 @@ var moment = require('moment-timezone');
 
 module.exports = {
     setTimeZone: function (timeZone) {
-        moment.tz.setDefault(config.timezone);
+        moment.tz.setDefault(timeZone);
     },
     saveLog: function(command, skypeData){
         var parseData = parser.parseParams(skypeData);
