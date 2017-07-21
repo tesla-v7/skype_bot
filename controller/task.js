@@ -1,8 +1,8 @@
 'use strict';
 let models      = require('../models/index');
 const crypto    = require('crypto');
-let moment      = require('moment');
-let googleDoc = require('../lib/googleDoc');
+let moment      = require('moment-timezone');
+let googleDoc   = require('../lib/googleDoc');
 
 let Months = [
     'Январь',
@@ -25,6 +25,9 @@ let zeroLine = [];
 
 module.exports = {
     sheetParams: null,
+    setTimeZone: function (timeZone) {
+        moment.tz.setDefault(config.timezone);
+    },
     setAuth: function (auth) {
         googleDoc.setAuth(auth);
     },

@@ -1,13 +1,11 @@
 'use strict';
 var models = require('../models/index');
 var parser = require('../lib/parser');
-var moment    = require('moment');
-var builder   = require('botbuilder');
-
+var moment = require('moment-timezone');
 
 module.exports = {
     setTimeZone: function (timeZone) {
-        moment.tz(timeZone);
+        moment.tz.setDefault(config.timezone);
     },
     saveLog: function(command, skypeData){
         var parseData = parser.parseParams(skypeData);

@@ -3,7 +3,7 @@ var config    = require(__dirname + '/config/config.json')[env || 'development']
 var restify   = require('restify');
 var builder   = require('botbuilder');
 
-var moment    = require('moment');
+var moment    = require('moment-timezone');
 var schedule  = require('node-schedule');
 
 var router    = require('./lib/router');
@@ -27,10 +27,13 @@ var connector = new builder.ChatConnector({
 // Listen for messages from users 
 server.post('/api/messages', connector.listen());
 
-moment.tz(config.timezone);
+console.log('Local time ', moment().format("YYYY.MM.DD HH:mm"));
+moment.tz.setDefault(config.timezone);
+console.log('Timezone time ', moment().format("YYYY.MM.DD HH:mm"));
 
 task.setAuth(config.auth.google);
 task.setSheetParams(config.google_sheet);
+task.setTimeZone(config.timezone);
 loger.setTimeZone(config.timezone);
 
 let msg = new builder.Message().address(config.skype.address);
