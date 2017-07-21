@@ -26,7 +26,7 @@ let zeroLine = [];
 module.exports = {
     sheetParams: null,
     setTimeZone: function (timeZone) {
-        moment.tz.setDefault(config.timezone);
+        moment.tz.setDefault(timeZone);
     },
     setAuth: function (auth) {
         googleDoc.setAuth(auth);
