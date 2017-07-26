@@ -149,7 +149,8 @@ AND valid=1 AND timestamp_usr BETWEEN '${data} 00:00:00' And '${data} 23:59:59' 
                                             sheetsData[month].googleDoc.values[index] = line = line.concat(the.zeroArray(day - line.length));
                                         }
                                         // line[day] = (task.data[name] / houseWorkDay).toFixed(2).replace('.', ',');
-                                        line[day] = (task.data[name] / houseWorkDay).toFixed(2) -0;
+                                        // line[day] = (task.data[name] / houseWorkDay).toFixed(2) -0;
+                                        line[day] = the.crumbleOfTime(task.data[name]);
                                     }
                                 }
                             });
@@ -212,5 +213,17 @@ AND valid=1 AND timestamp_usr BETWEEN '${data} 00:00:00' And '${data} 23:59:59' 
     },
     zeroArray: function (len) {
         return Array(len +1).join(' ').split(' ');
+    },
+    crumbleOfTime: function (hours) {
+        if(hours < 4){
+            return 0;
+        }
+        if(hours >= 4 && hours < 7){
+            return 0.5;
+        }
+        if(hours >= 7){
+            return 1;
+        }
+        return '';
     }
 };
